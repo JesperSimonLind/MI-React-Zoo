@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { IAnimal } from "../models/IAnimal";
 
 export const ShowAnimals = () => {
@@ -20,7 +21,9 @@ export const ShowAnimals = () => {
           <>
             <div key={animal.id}>
               {/* <img src={animal.imageUrl} alt={animal.name} /> */}
-              <p>{animal.name}</p>
+              <Link to={"/animal/" + animal.id}>
+                <p>{animal.name}</p>
+              </Link>
               <p>{animal.shortDescription}</p>
               <p>{animal.isFed}</p>
             </div>
