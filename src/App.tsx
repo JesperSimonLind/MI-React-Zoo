@@ -1,7 +1,17 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { ShowAnimals } from "./components/ShowAnimals";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ShowAnimals />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;
