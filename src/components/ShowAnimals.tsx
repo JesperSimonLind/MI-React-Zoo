@@ -13,5 +13,20 @@ export const ShowAnimals = () => {
         console.log(animalData);
       });
   });
-  return <>Det funkar!</>;
+  return (
+    <>
+      {animals.map((animal) => {
+        return (
+          <>
+            <div key={animal.id}>
+              {/* <img src={animal.imageUrl} alt={animal.name} /> */}
+              <p>{animal.name}</p>
+              <p>{animal.shortDescription}</p>
+              <p>{animal.isFed}</p>
+            </div>
+          </>
+        );
+      })}
+    </>
+  );
 };
