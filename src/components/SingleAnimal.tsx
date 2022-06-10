@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IAnimal } from "../models/IAnimal";
+import { NavButton } from "./StyledComponents/Buttons";
 
 export const SingleAnimal = () => {
   const [animal, setAnimal] = useState<IAnimal>({
@@ -23,7 +24,7 @@ export const SingleAnimal = () => {
       <h2>{animal.latinName}</h2>
       <p>Information: {animal.longDescription}</p>
       <Link to="/">
-        <button>Back to Home Page</button>
+        <NavButton>Back to Home Page</NavButton>
       </Link>
     </>
   );
