@@ -6,7 +6,7 @@ import { SingleAnimal } from "./components/SingleAnimal";
 
 function App() {
   return (
-    <>
+    <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ShowAnimals />} />
@@ -14,7 +14,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

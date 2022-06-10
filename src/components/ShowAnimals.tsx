@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IAnimal } from "../models/IAnimal";
+import { NavButton } from "./StyledComponents/Buttons";
+import { StyledDescription } from "./StyledComponents/Description";
+import { StyledImage } from "./StyledComponents/Images";
+import { StyledTitle } from "./StyledComponents/Titles";
+import { ButtonWrapper, ImageWrapper } from "./StyledComponents/Wrappers";
 
 export const ShowAnimals = () => {
   const [animals, setAnimals] = useState<IAnimal[]>([]);
@@ -20,12 +25,16 @@ export const ShowAnimals = () => {
         return (
           <>
             <div key={animal.id}>
-              {/* <img src={animal.imageUrl} alt={animal.name} /> */}
-              <Link to={"/animal/" + animal.id}>
-                <p>{animal.name}</p>
-              </Link>
-              <p>{animal.shortDescription}</p>
-              <p>{animal.isFed}</p>
+              <StyledTitle>{animal.name}</StyledTitle>
+              {/* <ImageWrapper>
+                <StyledImage src={animal.imageUrl} alt={animal.name} />
+              </ImageWrapper> */}
+              <StyledDescription>{animal.shortDescription}</StyledDescription>
+              <ButtonWrapper>
+                <Link to={"/animal/" + animal.id}>
+                  <NavButton>Mer Info</NavButton>
+                </Link>
+              </ButtonWrapper>
             </div>
           </>
         );

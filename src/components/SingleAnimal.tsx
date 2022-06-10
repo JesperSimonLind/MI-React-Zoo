@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IAnimal } from "../models/IAnimal";
 import { NavButton } from "./StyledComponents/Buttons";
+import { StyledDescription } from "./StyledComponents/Description";
+import { StyledImage } from "./StyledComponents/Images";
+import { StyledTitle } from "./StyledComponents/Titles";
+import { ButtonWrapper, ImageWrapper } from "./StyledComponents/Wrappers";
 
 export const SingleAnimal = () => {
   const [animal, setAnimal] = useState<IAnimal>({
@@ -20,12 +24,19 @@ export const SingleAnimal = () => {
   });
   return (
     <>
-      <h2>{animal.name}</h2>
-      <h2>{animal.latinName}</h2>
-      <p>Information: {animal.longDescription}</p>
-      <Link to="/">
-        <NavButton>Back to Home Page</NavButton>
-      </Link>
+      <StyledTitle>{animal.name}</StyledTitle>
+      <StyledTitle>{animal.latinName}</StyledTitle>
+      <ImageWrapper>
+        <StyledImage src={animal.imageUrl} alt={animal.name} />
+      </ImageWrapper>
+      <StyledDescription>
+        Information: {animal.longDescription}
+      </StyledDescription>
+      <ButtonWrapper>
+        <Link to="/">
+          <NavButton>Back to Home Page</NavButton>
+        </Link>
+      </ButtonWrapper>
     </>
   );
 };

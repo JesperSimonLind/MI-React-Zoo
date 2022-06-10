@@ -7,6 +7,8 @@ export const NavButton = styled.button`
   width: 100px;
   border-radius: 5px;
   background-color: green;
+  margin-top: 10px;
+
   &:hover {
     transform: scale(1.03);
     background-color: #007800;
