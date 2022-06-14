@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IAnimal } from "../models/IAnimal";
+import { getList, save } from "../services/StorageService";
 import { FedButton, NavButton } from "./StyledComponents/Buttons";
 import { StyledDescription } from "./StyledComponents/Description";
 import { StyledImage } from "./StyledComponents/Images";
@@ -15,23 +16,23 @@ export const SingleAnimal = () => {
     longDescription: "",
   });
 
-  const [isFed, setIsFed] = useState(false);
-
-  let params = useParams();
+  let params = useParams() as { id: string };
 
   const feedAnimal = () => {
     animal.isFed = true;
     const date = new Date().toString();
     animal.lastFed = date;
-    setIsFed(true);
     console.log(animal);
   };
 
   useEffect(() => {
-    fetch("https://animals.azurewebsites.net/api/animals/" + params.id)
-      .then((response) => response.json())
-      .then((singleAnimalInfo) => setAnimal(singleAnimalInfo));
-  });
+    let animalList: IAnimal[] = getList<IAnimal>();
+    for (let i = 0; i < animalList.length; i++) {
+      if (+params.id === animalList[i].id) {
+        setAnimal(animalList[i]);
+      }
+    }
+  }, []);
   return (
     <>
       <StyledTitle>{animal.name}</StyledTitle>
@@ -42,13 +43,15 @@ export const SingleAnimal = () => {
       <StyledDescription>Senast Matad: {animal.lastFed}</StyledDescription>
       <ButtonWrapper>
         {animal.isFed ? (
-          <FedButton>Redan matad</FedButton>
+          <FedButton disabled>Redan matad</FedButton>
         ) : (
           <FedButton onClick={feedAnimal}>Mata mig</FedButton>
         )}
       </ButtonWrapper>
       <StyledDescription>
-        Information: {animal.longDescription}
+        <p>Information: {animal.longDescription}</p>
+        <p>Födelseår: {animal.yearOfBirth}</p>
+        <p>Medicin: {animal.medicine} </p>
       </StyledDescription>
       <ButtonWrapper>
         <Link to="/">
