@@ -10,13 +10,17 @@ import { ButtonWrapper, ImageWrapper } from "./StyledComponents/Wrappers";
 export const ShowAnimals = () => {
   const [animals, setAnimals] = useState<IAnimal[]>([]);
 
+  const LOCALSTORAGE_KEY = "animals";
+
+  JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY) || "[]");
+
   useEffect(() => {
     if (animals.length !== 0) return;
     fetch("https://animals.azurewebsites.net/api/animals")
       .then((response) => response.json())
       .then((animalData) => {
         setAnimals(animalData);
-        console.log(animalData);
+        localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(animalData));
       });
   });
   return (
