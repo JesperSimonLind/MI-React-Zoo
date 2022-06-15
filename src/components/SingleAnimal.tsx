@@ -14,25 +14,35 @@ export const SingleAnimal = () => {
     latinName: "",
     imageUrl: "",
     longDescription: "",
+    isFed: false,
   });
+  let animalList: IAnimal[] = getList<IAnimal>();
 
   let params = useParams() as { id: string };
 
-  const feedAnimal = () => {
-    animal.isFed = true;
-    const date = new Date().toString();
-    animal.lastFed = date;
-    console.log(animal);
-  };
-
   useEffect(() => {
-    let animalList: IAnimal[] = getList<IAnimal>();
     for (let i = 0; i < animalList.length; i++) {
       if (+params.id === animalList[i].id) {
         setAnimal(animalList[i]);
       }
     }
   }, []);
+
+  const feedAnimal = () => {
+    let newFedAnimal = {
+      ...animal,
+      isFed: true,
+      lastFed: new Date().toString(),
+    };
+    setAnimal(newFedAnimal);
+    for (let i = 0; i < animalList.length; i++) {
+      if (animalList[i].id === newFedAnimal.id) {
+        animalList[i] = newFedAnimal;
+        save(animalList);
+      }
+    }
+  };
+
   return (
     <>
       <StyledTitle>{animal.name}</StyledTitle>
@@ -40,7 +50,9 @@ export const SingleAnimal = () => {
       <ImageWrapper>
         <StyledImage src={animal.imageUrl} alt={animal.name} />
       </ImageWrapper>
-      <StyledDescription>Senast Matad: {animal.lastFed}</StyledDescription>
+      <StyledDescription>
+        Senast Matad: {animal.lastFed} {animal.isFed.toString()}
+      </StyledDescription>
       <ButtonWrapper>
         {animal.isFed ? (
           <FedButton disabled>Redan matad</FedButton>
