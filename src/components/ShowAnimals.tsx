@@ -23,7 +23,7 @@ export const ShowAnimals = () => {
     } else {
       setAnimals(animalList);
     }
-  });
+  }, []);
   return (
     <>
       {animals.map((animal) => {
