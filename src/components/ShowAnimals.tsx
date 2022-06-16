@@ -31,9 +31,9 @@ export const ShowAnimals = () => {
           <>
             <div key={animal.id}>
               <StyledTitle>{animal.name}</StyledTitle>
-              {/* <ImageWrapper>
+              <ImageWrapper>
                 <StyledImage src={animal.imageUrl} alt={animal.name} />
-              </ImageWrapper> */}
+              </ImageWrapper>
               <StyledDescription>{animal.shortDescription}</StyledDescription>
               <ButtonWrapper>
                 <Link to={"/animal/" + animal.id}>
